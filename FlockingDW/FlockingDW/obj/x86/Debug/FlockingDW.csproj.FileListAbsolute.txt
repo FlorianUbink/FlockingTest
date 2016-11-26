@@ -1,0 +1,27 @@
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\Content\New Piskel.xnb
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\FlockingDW.exe
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\FlockingDW.pdb
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\obj\x86\Debug\FlockingDW.csprojResolveAssemblyReference.cache
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\obj\x86\Debug\FlockingDW.exe
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\obj\x86\Debug\FlockingDW.pdb
+C:\Users\Florian\Documents\FlockingDW\FlockingDW\bin\Windows\x86\Debug\Content\StaticBlock.xnb
