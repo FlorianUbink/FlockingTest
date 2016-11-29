@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,46 +14,48 @@ namespace FlockingDW
     public class Bird
     {
         public Vector2 position;
-        Vector2 direction;
+        Vector2 velocity;
         Vector2 origin;
-        float speed;
+        Vector2 steer;
+
         float rotation;
-        float comfortZone;
-        float distanceBirds;
+        float speedLimit;
         Texture2D sprite;
         Random rand = new Random();
         public bool Alive;
-        public bool allowCohesion = false;
-        public bool allowSeperation = false;
+
+        int totalTime = 0;
+        int elapsedTime = 5000;
 
         public Bird(Texture2D sprite, float x, float y)
         {
             this.sprite = sprite;
             Alive = true;
             position = new Vector2(x, y);
-
-            target(new Vector2(rand.Next(1280), rand.Next(720)));
-            speed = 1f;
+            steer = new Vector2();
+            velocity = new Vector2((float)rand.NextDouble()*40, (float)rand.NextDouble() * 40);
             origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            comfortZone = 50f;
-            distanceBirds = 25f;
+            speedLimit = 50f;
         }
 
-        public void Update(List<Bird> Friends)
+        public void Update(GameTime gameTime, List<Bird> Friends)
         {
 
-            Bounds();
+            steer = randomSteer(gameTime, steer);
 
-            if (allowSeperation)
-            { Seperation(Friends);}
-            
-            if (allowCohesion)
-            {Cohesion(Friends); }
-            
+            velocity.X += steer.X * gameTime.ElapsedGameTime.Milliseconds / 1000;
+            velocity.Y += steer.Y * gameTime.ElapsedGameTime.Milliseconds / 1000;
+            velocity = limiter(velocity, speedLimit);
 
-            position += direction * speed;
+            position.X += velocity.X * gameTime.ElapsedGameTime.Milliseconds / 1000;
+            position.Y += velocity.Y * gameTime.ElapsedGameTime.Milliseconds / 1000;
 
-            
+            rotation = (float)(Math.Atan2(velocity.Y, velocity.X) + Math.PI);
+
+            position.X = (position.X + 1280) % 1280;
+            position.Y = (position.Y + 720) % 720;
+
+            Debug.WriteLine("Steer: " + steer + "Velocity: " + velocity);
 
         }
 
@@ -61,78 +64,38 @@ namespace FlockingDW
             spriteBatch.Draw(sprite, position, null, Color.White, rotation, origin,1f, SpriteEffects.None,0);
         }
 
-        private void Bounds()
+
+        private Vector2 limiter(Vector2 vector, float speedLimit)
         {
-            if (position.X < 0 || position.X > 1280)
+            float length = (float)(Math.Sqrt((vector.X * vector.X) + (vector.Y * vector.Y)));
+            if(length>speedLimit)
             {
-                Alive = false;
+
+                Vector2 newVelocity = (speedLimit / length) * vector;
+                float newLength = (float)(Math.Sqrt((newVelocity.X * newVelocity.X) + (newVelocity.Y * newVelocity.Y)));
+                return newVelocity;
             }
-
-            if (position.Y < 0 || position.Y > 720)
+            else
             {
-                Alive = false;
-            }
-        }
-
-        private void Cohesion(List<Bird> Friends)
-        {
-            foreach (Bird friend in Friends)
-            {
-                Vector2 sum = new Vector2(0,0);
-                float d = Vector2.Distance(position, friend.position);
-                int count = 0;
-
-                if ((d > 0) && (d < comfortZone))
-                {
-                    sum.X = sum.X + friend.position.X;
-                    sum.Y = sum.Y + friend.position.Y;
-                    count += 1;
-                }
-
-                if (count > 0)
-                {
-                    target((sum / count));
-                }
+                return vector;
             }
         }
 
-        private void Seperation(List<Bird> Friends)
+        private Vector2 randomSteer(GameTime gameTime, Vector2 vector)
         {
-            
-
-            foreach (Bird friend in Friends)
-            {
-                Vector2 sum = new Vector2(0, 0);
-                Vector2 diff = new Vector2();
-                float d = Vector2.Distance(position, friend.position);
-                int count = 0;
-
-                if ((d > 0) && (d < distanceBirds))
+                if (elapsedTime >= totalTime)
                 {
-                    diff = Vector2.Subtract(position, friend.position);
-                    diff.Normalize();
-                    diff = diff / d;
-
-                    sum = sum + diff;
-                    count += 1;
+                elapsedTime = 0;
+                    return new Vector2((float)rand.NextDouble() * 30, (float)rand.NextDouble() * 30);
+                }
+                else
+                {
+                elapsedTime += gameTime.ElapsedGameTime.Milliseconds;
+                    return vector;
                 }
 
-                if (count > 0)
-                {
-                    sum = sum / count;
-                    sum.Normalize();
-                    direction = sum;
-                    rotation = (float)(Math.Atan2(direction.Y, direction.X) + Math.PI);
-                }
-
-            }
         }
 
-        public void target(Vector2 target)
-        {
-            direction = target - position;
-            rotation = (float)(Math.Atan2(direction.Y, direction.X) + Math.PI);
-            direction.Normalize();
-        }
+       
     }
 }

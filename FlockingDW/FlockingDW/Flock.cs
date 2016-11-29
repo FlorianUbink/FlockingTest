@@ -29,7 +29,7 @@ namespace FlockingDW
             rand = new Random();
             currentMiliseconds = 0;
             maxMiliseconds = 100;
-            maxBirds = 300;
+            maxBirds = 50;
         }
 
         public void Update(GameTime gameTime)
@@ -46,31 +46,11 @@ namespace FlockingDW
 
             foreach (Bird myBird in myBirds)
             {
-                KeyboardState kBoard = Keyboard.GetState();
 
-                if (kBoard.IsKeyDown(Keys.C))
-                {
-                    allowC = !allowC;
-                }
-
-                if (kBoard.IsKeyDown(Keys.S))
-                {
-                    allowS = !allowS;
-                }
-
-                myBird.allowCohesion = allowC;
-                myBird.allowSeperation = allowS;
-                myBird.Update(myBirds);
+                myBird.Update(gameTime, myBirds);
             }
 
 
-            for (int b = myBirds.Count - 1; b >= 0; b--)
-            {
-                if (!myBirds[b].Alive)
-                {
-                    myBirds.RemoveAt(b);
-                }
-            }
 
             currentMiliseconds += gameTime.ElapsedGameTime.Milliseconds;
         }

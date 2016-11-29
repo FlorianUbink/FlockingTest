@@ -13,7 +13,7 @@ namespace FlockingDW
         SpriteBatch spriteBatch;
         ButtonState left;
         Flock firstFlock;
-        Magnet myMagnet;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,7 +33,7 @@ namespace FlockingDW
         {
             // TODO: Add your initialization logic here
             firstFlock = new Flock(Content);
-            myMagnet = new Magnet(Content, 1280 * 3 / 4, 720 / 2);
+            
 
             base.Initialize();
         }
@@ -70,16 +70,10 @@ namespace FlockingDW
                 Exit();
 
             // TODO: Add your update logic here
-            MouseState mouse = Mouse.GetState();
-            if (mouse.LeftButton == ButtonState.Released && left == ButtonState.Pressed)
-            {
-                myMagnet.magnatize = !myMagnet.magnatize;
-            }
-
+          
             firstFlock.Update(gameTime);
-            myMagnet.Update(firstFlock.myBirds);
 
-            left = mouse.LeftButton;
+
             base.Update(gameTime);
         }
 
@@ -94,7 +88,6 @@ namespace FlockingDW
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             firstFlock.Draw(spriteBatch);
-            myMagnet.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
