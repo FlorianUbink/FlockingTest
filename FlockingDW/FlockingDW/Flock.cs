@@ -20,6 +20,7 @@ namespace FlockingDW
         int maxBirds;
         bool allowC = false;
         bool allowS = false;
+        ButtonState RightPrevious;
 
 
         public Flock(ContentManager content)
@@ -29,48 +30,29 @@ namespace FlockingDW
             rand = new Random();
             currentMiliseconds = 0;
             maxMiliseconds = 100;
-            maxBirds = 300;
+            maxBirds = 100;
         }
 
         public void Update(GameTime gameTime)
         {
+            MouseState mouse = Mouse.GetState();
             if (currentMiliseconds >= maxMiliseconds)
             {
                 if (myBirds.Count < maxBirds)
                 {
-                    float factor = (float)(rand.NextDouble());
-                    myBirds.Add(new Bird(birdSprite, (factor * 1280f), (factor * 720f)));
+                    myBirds.Add(new Bird(birdSprite, rand.Next(0, 1280), rand.Next(0,720)));
                 }
                 currentMiliseconds = 0;
             }
 
+            setTarget(mouse);
+
             foreach (Bird myBird in myBirds)
             {
-                KeyboardState kBoard = Keyboard.GetState();
-
-                if (kBoard.IsKeyDown(Keys.C))
-                {
-                    allowC = !allowC;
-                }
-
-                if (kBoard.IsKeyDown(Keys.S))
-                {
-                    allowS = !allowS;
-                }
-
-                myBird.allowCohesion = allowC;
-                myBird.allowSeperation = allowS;
                 myBird.Update(myBirds);
             }
 
 
-            for (int b = myBirds.Count - 1; b >= 0; b--)
-            {
-                if (!myBirds[b].Alive)
-                {
-                    myBirds.RemoveAt(b);
-                }
-            }
 
             currentMiliseconds += gameTime.ElapsedGameTime.Milliseconds;
         }
@@ -82,6 +64,20 @@ namespace FlockingDW
                 myFlock.Draw(spriteBatch);
             }
         }
+
+        private void setTarget(MouseState mouse)
+        {
+            if (mouse.RightButton == ButtonState.Released && RightPrevious == ButtonState.Pressed)
+            {
+                foreach (Bird bird in myBirds)
+                {
+                    bird.Target(new Vector2(mouse.X, mouse.Y));
+                }
+            }
+
+            RightPrevious = mouse.RightButton;
+        }
+
 
     }
 }

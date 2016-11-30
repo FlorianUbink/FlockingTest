@@ -71,10 +71,7 @@ namespace FlockingDW
 
             // TODO: Add your update logic here
             MouseState mouse = Mouse.GetState();
-            if (mouse.LeftButton == ButtonState.Released && left == ButtonState.Pressed)
-            {
-                myMagnet.magnatize = !myMagnet.magnatize;
-            }
+            
 
             firstFlock.Update(gameTime);
             myMagnet.Update(firstFlock.myBirds);

@@ -30,10 +30,9 @@ namespace FlockingDW
                 foreach (Bird bird in birds)
                 {
                     float dist = Vector2.Distance(position, bird.position);
-                    bird.allowCohesion = false;
                     if ((dist > 0) && (dist < magnetRange))
                     {
-                        bird.target(position);
+                        bird.Target(position);
                     }
                 }
             }
